@@ -13,3 +13,11 @@ task :blog do |t|
   sh "tmux select-window -t blog:1"
   sh "tmux attach -t blog"
 end
+
+desc 'Clean Latex aux files in this specific dir'
+task :cleanex do |t|
+  this_dir = Rake.original_dir
+  files_to_delete = Rake::FileList.new("#{this_dir}/*.aux", "#{this_dir}/*.log")
+  files_to_delete.each { |f| rm f }
+end
+
